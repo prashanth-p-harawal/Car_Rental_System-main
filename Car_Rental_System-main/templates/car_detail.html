@@ -1,0 +1,82 @@
+{% extends 'base.html' %}
+
+{% block title %}{{ car.name }}{% endblock %}
+
+{% block content %}
+
+<div class="container py-5">
+
+    <div class="row">
+
+        <div class="col-lg-6">
+
+            {% if car.image %}
+                <img src="{{ car.image.url }}"
+                     class="img-fluid rounded shadow"
+                     alt="{{ car.name }}">
+            {% else %}
+                <img src="https://via.placeholder.com/700x450"
+                     class="img-fluid rounded shadow"
+                     alt="No Image">
+            {% endif %}
+
+        </div>
+
+        <div class="col-lg-6">
+
+            <h2 class="fw-bold">{{ car.name }}</h2>
+
+            <h5 class="text-muted">{{ car.brand }}</h5>
+
+            <hr>
+
+            <p><strong>Model:</strong> {{ car.model }}</p>
+
+            <p><strong>Year:</strong> {{ car.year }}</p>
+
+            <p><strong>Fuel:</strong> {{ car.fuel }}</p>
+
+            <p><strong>Transmission:</strong> {{ car.transmission }}</p>
+
+            <p><strong>Seats:</strong> {{ car.seats }}</p>
+
+            <h3 class="text-warning">
+                ₹{{ car.price }}
+                <small class="text-muted">/ Day</small>
+            </h3>
+
+            <p class="mt-3">
+                {{ car.description }}
+            </p>
+
+            {% if car.available %}
+                <span class="badge bg-success fs-6">
+                    Available
+                </span>
+            {% else %}
+                <span class="badge bg-danger fs-6">
+                    Not Available
+                </span>
+            {% endif %}
+
+            <div class="mt-4">
+
+                <a href="{% url 'book_car' car.id %}"
+                   class="btn btn-warning">
+                    Book Now
+                </a>
+
+                <a href="{% url 'cars' %}"
+                   class="btn btn-secondary">
+                    Back to Cars
+                </a>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+
+{% endblock %}

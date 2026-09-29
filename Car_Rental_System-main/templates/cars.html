@@ -1,0 +1,342 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}Available Cars{% endblock %}
+
+{% block content %}
+
+<!-- Page Heading -->
+<section class="py-5 bg-dark text-white">
+    <div class="container text-center">
+        <h1 class="display-5 fw-bold">Available Cars</h1>
+        <p class="lead">Choose your perfect ride for your next journey.</p>
+    </div>
+</section>
+
+<!-- Cars Section -->
+<section class="container py-5">
+     <div class="card shadow mb-5">
+
+    <div class="card-body">
+
+        <form method="GET">
+
+            <div class="row">
+
+                <div class="col-md-3 mb-3">
+
+                    <input
+                        type="text"
+                        name="search"
+                        class="form-control"
+                        placeholder="Search Car"
+                        value="{{ request.GET.search }}">
+
+                </div>
+
+                <div class="col-md-2 mb-3">
+
+                    <input
+                        type="text"
+                        name="brand"
+                        class="form-control"
+                        placeholder="Brand"
+                        value="{{ request.GET.brand }}">
+
+                </div>
+
+                <div class="col-md-2 mb-3">
+
+                    <select
+                        name="fuel"
+                        class="form-select">
+
+                        <option value="">Fuel</option>
+
+                        <option value="Petrol">Petrol</option>
+
+                        <option value="Diesel">Diesel</option>
+
+                        <option value="Electric">Electric</option>
+
+                        <option value="Hybrid">Hybrid</option>
+
+                    </select>
+
+                </div>
+
+                <div class="col-md-2 mb-3">
+
+                    <select
+                        name="transmission"
+                        class="form-select">
+
+                        <option value="">Transmission</option>
+
+                        <option value="Manual">Manual</option>
+
+                        <option value="Automatic">Automatic</option>
+
+                    </select>
+
+                </div>
+
+                <div class="col-md-3 mb-3">
+
+                    <button class="btn btn-primary w-100">
+
+                        🔍 Search
+
+                    </button>
+
+                </div>
+
+            </div>
+
+        </form>
+
+    </div>
+
+</div>
+    <div class="row g-4">
+
+        {% for car in cars %}
+
+        <div class="col-lg-4 col-md-6">
+
+            <div class="card border-0 shadow-lg h-100">
+
+                <div class="position-relative">
+
+                    {% if car.image %}
+                        <img src="{{ car.image.url }}"
+                             class="card-img-top"
+                             style="height:240px; object-fit:cover;">
+                    {% else %}
+                        <img src="https://images.unsplash.com/photo-1503376780353-7e6692767b70?w=600"
+                             class="card-img-top"
+                             style="height:240px; object-fit:cover;">
+                    {% endif %}
+
+                    {% if car.available %}
+                    <span class="badge bg-success position-absolute top-0 end-0 m-3">
+                        Available
+                    </span>
+                    {% else %}
+                    <span class="badge bg-danger position-absolute top-0 end-0 m-3">
+                        Not Available
+                    </span>
+                    {% endif %}
+
+                </div>
+
+                <div class="card-body">
+
+                    <h4 class="fw-bold">
+                        {{ car.name }}
+                    </h4>
+
+                    <p class="text-muted mb-3">
+                        {{ car.brand }}
+                    </p>
+
+                    <div class="row text-center mb-3">
+
+                        <div class="col-4">
+                            <i class="bi bi-fuel-pump-fill text-success fs-4"></i>
+                            <p class="small mb-0">{{ car.fuel }}</p>
+                        </div>
+
+                        <div class="col-4">
+                            <i class="bi bi-gear-fill text-warning fs-4"></i>
+                            <p class="small mb-0">{{ car.transmission }}</p>
+                        </div>
+
+                        <div class="col-4">
+                            <i class="bi bi-people-fill text-primary fs-4"></i>
+                            <p class="small mb-0">{{ car.seats }} Seats</p>
+                        </div>
+
+                    </div>
+
+                    <hr>
+
+                    <h3 class="text-warning fw-bold">
+                        ₹{{ car.price }}
+                        <small class="text-muted fs-6">/ Day</small>
+                    </h3>
+
+                    <p class="text-muted">
+                        {{ car.description|truncatewords:12 }}
+                    </p>
+
+                </div>
+
+                <div class="card-footer bg-white border-0">
+
+                    <div class="d-grid gap-2">
+
+                        <a href="{% url 'car_detail' car.id %}" class="btn btn-primary">
+                            View Details
+                        </a>
+
+                        <a href="{% url 'book_car' car.id %}" class="btn btn-warning">
+                            Book Now
+                        </a>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+
+        {% empty %}
+
+        <!-- Default Static Cars (shown only when database is empty) -->
+
+        <div class="col-md-4">
+
+            <div class="card shadow-lg">
+
+                <img src="https://images.unsplash.com/photo-1503376780353-7e6692767b70?w=600"
+                     class="card-img-top">
+
+                <div class="card-body">
+
+                    <h5>Toyota Fortuner</h5>
+
+                    <p class="text-warning fw-bold">
+                        ₹4500 / Day
+                    </p>
+
+                    <button class="btn btn-dark w-100">
+                        Book Now
+                    </button>
+
+                </div>
+
+            </div>
+
+        </div>
+
+        <div class="col-md-4">
+
+            <div class="card shadow-lg">
+
+                <img src="https://images.unsplash.com/photo-1555215695-3004980ad54e?w=600"
+                     class="card-img-top">
+
+                <div class="card-body">
+
+                    <h5>BMW X5</h5>
+
+                    <p class="text-warning fw-bold">
+                        ₹9000 / Day
+                    </p>
+
+                    <button class="btn btn-dark w-100">
+                        Book Now
+                    </button>
+
+                </div>
+
+            </div>
+
+        </div>
+
+        <div class="col-md-4">
+
+            <div class="card shadow-lg">
+
+                <img src="https://images.unsplash.com/photo-1492144534655-ae79c964c9d7?w=600"
+                     class="card-img-top">
+
+                <div class="card-body">
+
+                    <h5>Audi A6</h5>
+
+                    <p class="text-warning fw-bold">
+                        ₹8000 / Day
+                    </p>
+
+                    <button class="btn btn-dark w-100">
+                        Book Now
+                    </button>
+
+                </div>
+
+            </div>
+
+        </div>
+
+        <div class="col-12 mt-4">
+
+            <div class="alert alert-info text-center">
+                <strong>No cars found in the database.</strong><br>
+                Showing demo cars. Add cars from the admin panel to display them here.
+            </div>
+
+        </div>
+
+        {% endfor %}
+
+    </div>
+
+</section>
+
+{% endblock %}
+
+<nav class="mt-5">
+
+    <ul class="pagination justify-content-center">
+
+        {% if cars.has_previous %}
+
+        <li class="page-item">
+
+            <a class="page-link"
+               href="?page={{ cars.previous_page_number }}">
+
+                Previous
+
+            </a>
+
+        </li>
+
+        {% endif %}
+
+        {% for i in cars.paginator.page_range %}
+
+        <li class="page-item {% if cars.number == i %}active{% endif %}">
+
+            <a class="page-link"
+               href="?page={{ i }}">
+
+                {{ i }}
+
+            </a>
+
+        </li>
+
+        {% endfor %}
+
+        {% if cars.has_next %}
+
+        <li class="page-item">
+
+            <a class="page-link"
+               href="?page={{ cars.next_page_number }}">
+
+                Next
+
+            </a>
+
+        </li>
+
+        {% endif %}
+
+    </ul>
+
+</nav>

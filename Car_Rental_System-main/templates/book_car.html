@@ -1,0 +1,289 @@
+{% extends 'base.html' %}
+
+{% block title %}Book {{ car.name }}{% endblock %}
+
+{% block content %}
+
+<div class="container py-5">
+
+    <div class="row g-4">
+
+        <!-- Car Details -->
+        <div class="col-lg-5">
+
+            <div class="card shadow border-0">
+
+                {% if car.image %}
+                <img src="{{ car.image.url }}"
+                     class="card-img-top"
+                     style="height:320px; object-fit:cover;">
+                {% endif %}
+
+                <div class="card-body">
+
+                    <h2 class="fw-bold">
+                        {{ car.name }}
+                    </h2>
+
+                    <p class="text-muted fs-5">
+                        {{ car.brand }}
+                    </p>
+
+                    <hr>
+
+                    <div class="row">
+
+                        <div class="col-6 mb-3">
+                            <strong>Model</strong><br>
+                            {{ car.model }}
+                        </div>
+
+                        <div class="col-6 mb-3">
+                            <strong>Year</strong><br>
+                            {{ car.year }}
+                        </div>
+
+                        <div class="col-6 mb-3">
+                            <strong>Fuel</strong><br>
+                            {{ car.fuel }}
+                        </div>
+
+                        <div class="col-6 mb-3">
+                            <strong>Transmission</strong><br>
+                            {{ car.transmission }}
+                        </div>
+
+                        <div class="col-6">
+                            <strong>Seats</strong><br>
+                            {{ car.seats }}
+                        </div>
+
+                        <div class="col-6">
+                            <strong>Availability</strong><br>
+
+                            {% if car.available %}
+                            <span class="badge bg-success">
+                                Available
+                            </span>
+                            {% else %}
+                            <span class="badge bg-danger">
+                                Not Available
+                            </span>
+                            {% endif %}
+
+                        </div>
+
+                    </div>
+
+                    <hr>
+
+                    <h3 class="text-warning fw-bold">
+
+                        ₹<span id="price">{{ car.price }}</span>
+
+                        <small class="text-muted">
+                            / Day
+                        </small>
+
+                    </h3>
+
+                </div>
+
+            </div>
+
+        </div>
+
+        <!-- Booking Form -->
+        <div class="col-lg-7">
+
+            <div class="card shadow border-0">
+
+                <div class="card-header bg-primary text-white">
+
+                    <h3 class="mb-0">
+                        Book This Car
+                    </h3>
+
+                </div>
+
+                <div class="card-body">
+
+                    <!-- Success / Error Messages -->
+                    {% if messages %}
+                        {% for message in messages %}
+                            <div class="alert alert-{{ message.tags }} alert-dismissible fade show" role="alert">
+
+                                {{ message }}
+
+                                <button type="button"
+                                        class="btn-close"
+                                        data-bs-dismiss="alert">
+                                </button>
+
+                            </div>
+                        {% endfor %}
+                    {% endif %}
+
+                    <form method="POST">
+
+                        {% csrf_token %}
+
+                        <div class="mb-3">
+
+                            <label class="form-label">
+                                Full Name
+                            </label>
+
+                            {{ form.customer_name }}
+
+                        </div>
+
+                        <div class="mb-3">
+
+                            <label class="form-label">
+                                Email Address
+                            </label>
+
+                            {{ form.email }}
+
+                        </div>
+
+                        <div class="mb-3">
+
+                            <label class="form-label">
+                                Phone Number
+                            </label>
+
+                            {{ form.phone }}
+
+                        </div>
+
+                        <div class="row">
+
+                            <div class="col-md-6 mb-3">
+
+                                <label class="form-label">
+                                    Pickup Date
+                                </label>
+
+                                {{ form.pickup_date }}
+
+                            </div>
+
+                            <div class="col-md-6 mb-3">
+
+                                <label class="form-label">
+                                    Return Date
+                                </label>
+
+                                {{ form.return_date }}
+
+                            </div>
+
+                        </div>
+
+                        <hr>
+
+                        <!-- Booking Summary -->
+
+                        <div class="alert alert-light border">
+
+                            <h5 class="fw-bold mb-3">
+                                Booking Summary
+                            </h5>
+
+                            <div class="d-flex justify-content-between">
+
+                                <span>Price / Day</span>
+
+                                <strong>
+                                    ₹{{ car.price }}
+                                </strong>
+
+                            </div>
+
+                            <div class="d-flex justify-content-between">
+
+                                <span>Total Days</span>
+
+                                <strong id="days">
+                                    1
+                                </strong>
+
+                            </div>
+
+                            <hr>
+
+                            <div class="d-flex justify-content-between">
+
+                                <h5>Total Amount</h5>
+
+                                <h4 class="text-success">
+
+                                    ₹<span id="total">
+                                        {{ car.price }}
+                                    </span>
+
+                                </h4>
+
+                            </div>
+
+                        </div>
+
+                        <button class="btn btn-success btn-lg">
+
+                            Confirm Booking
+
+                        </button>
+
+                        <a href="{% url 'cars' %}"
+                           class="btn btn-secondary btn-lg">
+
+                            Cancel
+
+                        </a>
+
+                    </form>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+
+<script>
+
+const pickup = document.getElementById("id_pickup_date");
+const ret = document.getElementById("id_return_date");
+
+const price = {{ car.price }};
+
+function calculate() {
+
+    if (pickup.value && ret.value) {
+
+        let start = new Date(pickup.value);
+        let end = new Date(ret.value);
+
+        let diff = (end - start) / (1000 * 60 * 60 * 24);
+
+        if (diff <= 0) {
+            diff = 1;
+        }
+
+        document.getElementById("days").innerHTML = diff;
+        document.getElementById("total").innerHTML = diff * price;
+    }
+
+}
+
+pickup.addEventListener("change", calculate);
+ret.addEventListener("change", calculate);
+
+</script>
+
+{% endblock %}

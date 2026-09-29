@@ -1,0 +1,138 @@
+{% extends 'base.html' %}
+
+{% block title %}Update Booking{% endblock %}
+
+{% block content %}
+
+<div class="container py-5">
+
+    <div class="row justify-content-center">
+
+        <div class="col-lg-6">
+
+            <div class="card shadow border-0">
+
+                <div class="card-header bg-primary text-white">
+
+                    <h3 class="mb-0">
+                        ✏️ Update Booking Status
+                    </h3>
+
+                </div>
+
+                <div class="card-body">
+
+                    <div class="mb-4">
+
+                        <h4>{{ booking.customer_name }}</h4>
+
+                        <hr>
+
+                        <p>
+                            <strong>Car:</strong>
+                            {{ booking.car.name }}
+                        </p>
+
+                        <p>
+                            <strong>Email:</strong>
+                            {{ booking.email }}
+                        </p>
+
+                        <p>
+                            <strong>Phone:</strong>
+                            {{ booking.phone }}
+                        </p>
+
+                        <p>
+                            <strong>Pickup Date:</strong>
+                            {{ booking.pickup_date }}
+                        </p>
+
+                        <p>
+                            <strong>Return Date:</strong>
+                            {{ booking.return_date }}
+                        </p>
+
+                        <p>
+                            <strong>Total Days:</strong>
+                            {{ booking.total_days }}
+                        </p>
+
+                        <p>
+                            <strong>Total Amount:</strong>
+
+                            <span class="text-success fw-bold">
+                                ₹{{ booking.total_amount }}
+                            </span>
+                        </p>
+
+                    </div>
+
+                    <form method="POST">
+
+                        {% csrf_token %}
+
+                        <div class="mb-4">
+
+                            <label class="form-label">
+
+                                Booking Status
+
+                            </label>
+
+                            <select
+                                name="status"
+                                class="form-select">
+
+                                <option value="Pending"
+                                {% if booking.status == 'Pending' %}selected{% endif %}>
+                                    Pending
+                                </option>
+
+                                <option value="Approved"
+                                {% if booking.status == 'Approved' %}selected{% endif %}>
+                                    Approved
+                                </option>
+
+                                <option value="Completed"
+                                {% if booking.status == 'Completed' %}selected{% endif %}>
+                                    Completed
+                                </option>
+
+                                <option value="Cancelled"
+                                {% if booking.status == 'Cancelled' %}selected{% endif %}>
+                                    Cancelled
+                                </option>
+
+                            </select>
+
+                        </div>
+
+                        <button
+                            type="submit"
+                            class="btn btn-success">
+
+                            💾 Save Changes
+
+                        </button>
+
+                        <a href="{% url 'booking_list' %}"
+                           class="btn btn-secondary">
+
+                            Back
+
+                        </a>
+
+                    </form>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+
+{% endblock %}

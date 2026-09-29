@@ -1,0 +1,101 @@
+{% extends 'base.html' %}
+
+{% block title %}Delete Booking{% endblock %}
+
+{% block content %}
+
+<div class="container py-5">
+
+    <div class="row justify-content-center">
+
+        <div class="col-lg-6">
+
+            <div class="card shadow border-0">
+
+                <div class="card-header bg-danger text-white">
+
+                    <h3 class="mb-0">
+                        🗑 Delete Booking
+                    </h3>
+
+                </div>
+
+                <div class="card-body text-center">
+
+                    <h4>{{ booking.customer_name }}</h4>
+
+                    <hr>
+
+                    <p>
+                        <strong>Car:</strong>
+                        {{ booking.car.name }}
+                    </p>
+
+                    <p>
+                        <strong>Email:</strong>
+                        {{ booking.email }}
+                    </p>
+
+                    <p>
+                        <strong>Phone:</strong>
+                        {{ booking.phone }}
+                    </p>
+
+                    <p>
+                        <strong>Total Amount:</strong>
+
+                        <span class="text-success fw-bold">
+
+                            ₹{{ booking.total_amount }}
+
+                        </span>
+
+                    </p>
+
+                    <div class="alert alert-warning mt-4">
+
+                        <h5>
+                            ⚠ Are you sure?
+                        </h5>
+
+                        <p class="mb-0">
+
+                            This booking will be permanently deleted.
+
+                        </p>
+
+                    </div>
+
+                    <form method="POST">
+
+                        {% csrf_token %}
+
+                        <button
+                            type="submit"
+                            class="btn btn-danger">
+
+                            🗑 Delete Booking
+
+                        </button>
+
+                        <a
+                            href="{% url 'booking_list' %}"
+                            class="btn btn-secondary">
+
+                            Cancel
+
+                        </a>
+
+                    </form>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+
+{% endblock %}

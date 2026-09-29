@@ -1,0 +1,179 @@
+{% extends 'base.html' %}
+
+{% block title %}Contact Us{% endblock %}
+
+{% block content %}
+
+<!-- Hero Section -->
+<section class="bg-dark text-white py-5">
+    <div class="container text-center">
+        <h1 class="display-4 fw-bold">Contact Us</h1>
+        <p class="lead mt-3">
+            We'd love to hear from you. Get in touch with our team anytime.
+        </p>
+    </div>
+</section>
+
+<!-- Contact Information -->
+<section class="py-5">
+    <div class="container">
+
+        <div class="row g-4 mb-5">
+
+            <div class="col-md-4">
+                <div class="card border-0 shadow-sm text-center h-100">
+                    <div class="card-body">
+                        <div class="display-4 mb-3">📍</div>
+                        <h5 class="fw-bold">Our Office</h5>
+                        <p class="text-muted mb-0">
+                            Kalaburagi,<br>
+                            Karnataka, India
+                        </p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-md-4">
+                <div class="card border-0 shadow-sm text-center h-100">
+                    <div class="card-body">
+                        <div class="display-4 mb-3">📞</div>
+                        <h5 class="fw-bold">Phone</h5>
+                        <p class="text-muted mb-0">
+                            +91 98765 43210
+                        </p>
+                        <p class="text-muted">
+                            Mon - Sun (24/7)
+                        </p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-md-4">
+                <div class="card border-0 shadow-sm text-center h-100">
+                    <div class="card-body">
+                        <div class="display-4 mb-3">✉️</div>
+                        <h5 class="fw-bold">Email</h5>
+                        <p class="text-muted mb-0">
+                            support@driveease.com
+                        </p>
+                        <p class="text-muted">
+                            We reply within 24 hours.
+                        </p>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+
+        <!-- Contact Form -->
+        <div class="row justify-content-center">
+
+            <div class="col-lg-8">
+
+                <div class="card shadow border-0">
+
+                    <div class="card-body p-5">
+
+                        <h2 class="text-center fw-bold mb-4">
+                            Send Us a Message
+                        </h2>
+
+                        <form method="POST">
+    {% csrf_token %}
+
+    <div class="row">
+
+        <div class="col-md-6 mb-3">
+            <label class="form-label">Full Name</label>
+            <input
+                type="text"
+                name="full_name"
+                class="form-control"
+                placeholder="Enter your name"
+                required>
+        </div>
+
+        <div class="col-md-6 mb-3">
+            <label class="form-label">Email Address</label>
+            <input
+                type="email"
+                name="email"
+                class="form-control"
+                placeholder="Enter your email"
+                required>
+        </div>
+
+    </div>
+
+    <div class="mb-3">
+        <label class="form-label">Phone Number</label>
+        <input
+            type="text"
+            name="phone"
+            class="form-control"
+            placeholder="Enter your phone number"
+            required>
+    </div>
+
+    <div class="mb-3">
+        <label class="form-label">Subject</label>
+        <input
+            type="text"
+            name="subject"
+            class="form-control"
+            placeholder="Enter subject"
+            required>
+    </div>
+
+    <div class="mb-4">
+        <label class="form-label">Message</label>
+        <textarea
+            name="message"
+            class="form-control"
+            rows="5"
+            placeholder="Write your message"
+            required></textarea>
+    </div>
+
+    <div class="d-grid">
+        <button type="submit" class="btn btn-primary btn-lg">
+            Send Message
+        </button>
+    </div>
+
+</form>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+</section>
+
+<!-- Google Map -->
+<section class="pb-5">
+    <div class="container">
+
+        <div class="text-center mb-4">
+            <h2 class="fw-bold">Find Us</h2>
+            <p class="text-muted">
+                Visit our office or contact us online.
+            </p>
+        </div>
+
+        <div class="ratio ratio-21x9 rounded shadow">
+            <iframe
+                src="https://www.google.com/maps?q=Kalaburagi,Karnataka&output=embed"
+                allowfullscreen=""
+                loading="lazy">
+            </iframe>
+        </div>
+
+    </div>
+</section>
+
+{% endblock %}

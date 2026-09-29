@@ -1,0 +1,233 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}Home | Car Rental System{% endblock %}
+
+{% block content %}
+
+<!-- Hero Section -->
+<section class="bg-dark text-white py-5">
+
+    <div class="container">
+
+        <div class="row align-items-center">
+
+            <div class="col-lg-6">
+
+                <h1 class="display-3 fw-bold">
+                    Find Your Perfect Ride
+                </h1>
+
+                <p class="lead mt-4">
+                    Rent premium cars at affordable prices.
+                    Safe, reliable and comfortable travel for
+                    business trips, vacations and family outings.
+                </p>
+
+                <a href="{% url 'cars' %}" class="btn btn-warning btn-lg mt-3">
+                    Browse Cars
+                </a>
+
+            </div>
+
+            <div class="col-lg-6 text-center">
+
+                <img src="https://images.unsplash.com/photo-1503376780353-7e6692767b70?w=900"
+                     class="img-fluid rounded shadow">
+
+            </div>
+
+        </div>
+
+    </div>
+
+</section>
+
+<!-- Features -->
+
+<section class="py-5">
+
+    <div class="container">
+
+        <div class="text-center mb-5">
+
+            <h2 class="fw-bold">
+                Why Choose Us?
+            </h2>
+
+            <p class="text-muted">
+                Experience the best car rental service.
+            </p>
+
+        </div>
+
+        <div class="row text-center">
+
+            <div class="col-md-4">
+
+                <div class="card shadow border-0 h-100">
+
+                    <div class="card-body">
+
+                        <h1>🚗</h1>
+
+                        <h4 class="mt-3">
+                            Premium Cars
+                        </h4>
+
+                        <p class="text-muted">
+                            Luxury, SUV, Sedan and Hatchback cars
+                            at affordable prices.
+                        </p>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+            <div class="col-md-4">
+
+                <div class="card shadow border-0 h-100">
+
+                    <div class="card-body">
+
+                        <h1>💰</h1>
+
+                        <h4 class="mt-3">
+                            Best Prices
+                        </h4>
+
+                        <p class="text-muted">
+                            Affordable daily rental plans with
+                            no hidden charges.
+                        </p>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+            <div class="col-md-4">
+
+                <div class="card shadow border-0 h-100">
+
+                    <div class="card-body">
+
+                        <h1>🛡️</h1>
+
+                        <h4 class="mt-3">
+                            Safe Journey
+                        </h4>
+
+                        <p class="text-muted">
+                            Well-maintained vehicles with
+                            24×7 customer support.
+                        </p>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</section>
+
+<!-- Statistics -->
+
+<section class="bg-primary text-white py-5">
+
+    <div class="container">
+
+        <div class="row text-center">
+
+            <div class="col-md-3">
+
+                <h1 class="fw-bold">
+                    500+
+                </h1>
+
+                <p>
+                    Happy Customers
+                </p>
+
+            </div>
+
+            <div class="col-md-3">
+
+                <h1 class="fw-bold">
+                    100+
+                </h1>
+
+                <p>
+                    Premium Cars
+                </p>
+
+            </div>
+
+            <div class="col-md-3">
+
+                <h1 class="fw-bold">
+                    24/7
+                </h1>
+
+                <p>
+                    Customer Support
+                </p>
+
+            </div>
+
+            <div class="col-md-3">
+
+                <h1 class="fw-bold">
+                    10+
+                </h1>
+
+                <p>
+                    Years Experience
+                </p>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</section>
+
+<!-- Call To Action -->
+
+<section class="py-5">
+
+    <div class="container">
+
+        <div class="card shadow-lg border-0">
+
+            <div class="card-body text-center p-5">
+
+                <h2 class="fw-bold">
+                    Ready for Your Next Journey?
+                </h2>
+
+                <p class="text-muted mt-3">
+                    Book your favourite car in just a few clicks.
+                </p>
+
+                <a href="{% url 'cars' %}" class="btn btn-success btn-lg mt-3">
+                    Book Now
+                </a>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</section>
+
+{% endblock %}
